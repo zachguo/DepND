@@ -36,17 +36,39 @@ class NegDep():
                             break
 
     def parse(self):
+        # run stanford parser to produce denpency trees
         cmd = "./stanford-parser-2013-04-05/lexparser.sh "+self.trimmed_filepath+" > "+self.parsed_filepath
         print "start parsing ..."
         os.system(cmd)
+
+    def visualize_ParsedTree(self):
+        # visualize the parsed output using DependenSee, one sent by one sent
+        # save the visualization into .png
+        # !!Use carefully!! DependenSee has minor bugs (cannot read some parsed tree correctly)
+        print "starting visualizing parsed trees ..."
+        fout_tmp = open("./data/parsed_output.tmp","w")
+        i_sent = 1
+        with open(self.parsed_filepath,'r') as fin:
+            for line in fin:
+                line = line.strip()
+                if line:
+                    fout_tmp.write(line+"\n")
+                else:
+                    fout_tmp.close()
+                    # call DependenSee to visualize the parsed tree
+                    cmd = "java -cp ./stanford-parser-2013-04-05/DependenSee.jar:./stanford-parser-2013-04-05/stanford-parser.jar:./stanford-parser-2013-04-05/stanford-parser-2.0.5-models.jar com.chaoticity.dependensee.Main -t ./data/parsed_output.tmp ./data/parsed_output_visualization/"+str(i_sent)+".png"
+                    os.system(cmd)
+                    fout_tmp = open("./data/parsed_output.tmp","w")
+                    i_sent += 1
 
     def run(self):
         self.read_NegTriggers()
         self.read_TestFile()
         self.parse()
+        self.visualize_ParsedTree()
         
 ## test run
-trigger_filepath = "/Users/siyuanguo/GoogleDrive/Megaputer/NegDetection/DepNegEx/data/negTriggers.txt"
+trigger_filepath = "./data/negTriggers.txt"
 test_filepath = "/Users/siyuanguo/GoogleDrive/Corpora/NegationDetectionCorpora/cleaned/PlainTextNoTag/bioscope_abstracts_cleaned.txt"
 bioscope = NegDep(trigger_filepath, test_filepath)
 bioscope.run()
