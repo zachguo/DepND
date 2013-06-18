@@ -6,8 +6,10 @@ neither
 nor
 never
 without
+rather than
 absent
 none
+unable
 unremarkable
 unlikely
 negative
@@ -20,14 +22,15 @@ fail
 fails
 failed
 failing
-decline
-declines
 declined
-declining
 exclude
 excludes
 excluded
 excluding
+lack
+lacks
+lacked
+lacking
 rule out
 rules out
 ruled out
