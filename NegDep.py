@@ -46,7 +46,7 @@ class NegDep():
     def run(self):
         self.read_NegTriggers()
         self.read_TestFile()
-        self.parse()
+        #self.parse()
         
 ## test run
 trigger_filepath = "./data/negTriggers.txt"
