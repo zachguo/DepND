@@ -21,18 +21,14 @@ Negation detection using dependency parsing.
 * All MST should not cross punctuation marks along the direction of flow, no matter the flow moves towards left or right. But maybe some arcs can (see below).
 
 #### Specification
-* For RB,DT,JJ triggers:
-> including `no, not, hardly, absent, negative, unable`  
-> **gMST**
-* For CC triggers:
-> including `neither, nor`  
-> **gMST**
-* For VB*,IN triggers:
-> including `fail, lack, lacking, excluding, without`  
-> **sMST**
-* For NN triggers:
-> including `none, lack, absence, failure`  
-> **sMST**
+
+| Trigger_POS | Triggers | Rule |
+|  --- | --- | --- |
+| RB, DT, JJ | no, not, hardly, absent, negative, unable | **gMST** |
+| CC | neither, nor | **gMST** |
+| VB*, IN | fail, lack, lacking, excluding, without | **sMST** |
+| NN | none, lack, absence, failure | **sMST** |
+
 
 ### Additions:
 #### Minor rules:
