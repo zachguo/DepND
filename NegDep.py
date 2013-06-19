@@ -1,5 +1,6 @@
 ## NegDep
 import os
+import re
 
 class NegDep():
 
@@ -31,13 +32,14 @@ class NegDep():
                     line = line.strip()
                     if line:
                         for trigger in self.NegTriggers:
-                            if trigger in line:
+                            pattern = re.compile(r'\b'+trigger+r'\b')
+                            if pattern.search(line):
                                 tfout.write(line+"\n\n")
-                            break
+                                break
 
     def parse(self):
         # run stanford parser to produce denpency trees
-        cmd = "/Users/siyuanguo/Documents/nlptool/gdep-beta2/gdep "+self.trimmed_filepath+" > "+self.parsed_filepath
+        cmd = "cd /Users/siyuanguo/Documents/nlptool/gdep-beta2/ && ./gdep "+self.trimmed_filepath+" > "+self.parsed_filepath
         print "start parsing ..."
         os.system(cmd)
 

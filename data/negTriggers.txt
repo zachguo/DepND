@@ -8,7 +8,6 @@ never
 without
 rather than
 absent
-none
 unable
 unremarkable
 unlikely
@@ -22,12 +21,10 @@ fail
 fails
 failed
 failing
-declined
 exclude
 excludes
 excluded
 excluding
-lack
 lacks
 lacked
 lacking
@@ -36,3 +33,6 @@ rules out
 ruled out
 ruling out
 absence
+none
+lack
+failure
