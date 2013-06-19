@@ -41,7 +41,7 @@ Negation detection using dependency parsing.
 #### Situations that cannot be coped with default rules:
 
 | trigger | trg_pos | trg_rel | governor | gvn_pos | gvn_rel_upper | Rule | Additional-Rules |
-| --- |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | not | RB | DEP | but,and | CC | NMOD | ggMST | restricted to CC parent; only flow towards right |
 | not | RB | PMOD | in | IN | PMOD |gMST| PMOD arc **can** cross punctuation?|
 | not | RB | VMOD | does,did,is | VBZ | ROOT | gMST | **cannot** flow left towards "Although/IN", "Therefore/RB", "Moreover/RB" or "like/IN" through a VMOD arc |
