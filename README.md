@@ -31,7 +31,7 @@ Negation detection using dependency parsing.
 | RB, DT | no, not, hardly, never | *gMST* |
 | JJ | absent, negative, unable, unlikely | *gMST* |
 | CC | neither, nor | *gMST* |
-| VB\*, IN | fail, lack, lacking, excluding, without | *sMST* |
+| VB\*, IN | fail, lack, lacking, excluding, without, except | *sMST* |
 | NN | none, lack, absence, failure (to/of)| *sMST* |
 
 ### Additions:

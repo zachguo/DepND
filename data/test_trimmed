@@ -262,6 +262,8 @@ The findings are the first to demonstrate membrane binding sites with a high aff
 
 The second male patient had slight hypertension without hypokalemia.
 
+There was a normal increase in ACTH, cortisol, and GH (except in one obese patient) in response to insulin-induced hypoglycemia, while cortisol production was elevated in three patients.
+
 In the second male patient, no abnormalities were found.
 
 In contrast, mild oxidation with glucose oxidase selectively inhibits p75 and p85 binding while not blocking p50 and p55 interactions.
@@ -1606,6 +1608,8 @@ Interestingly, CyA and indomethacin did not suppress tumor necrosis factor-alpha
 
 In addition, aspirin and indomethacin, but not CyA, induced Hsp70 expression in HUVECs that correlated with induction of HSF-1 activity.
 
+CONCLUSION: Our results show that the tested agents (except indomethacin) are inhibitors of the T cell-mediated immune response, as expected, that aspirin is an effective suppressor of adhesion molecule expression, and that all three agents can induce Hsp60 in HUVECs.
+
 In contrast, HePTP had no effects on N-terminal c-Jun kinase or on events upstream of the MAP kinases.
 
 The specificity of HePTP correlated with its physical association through its noncatalytic N terminus with Erk and another MAP kinase, p38, but not Jnk or other proteins.
@@ -2432,6 +2436,8 @@ Trans-activation of the TP1 promoter and of the BamHI C promoter has already bee
 
 No significant differences between EBNA-2-positive and EBNA-2-negative nuclear extracts could be seen in the gel retardation assay under conditions that clearly showed binding of EBNA-2A to the TP1 promoter.
 
+Finally, infectious virus stocks that were isogenic except for the LTR were generated.
+
 Promoter constructs with mutations in these sequence elements were no longer expressed specifically in monocytes.
 
 Furthermore, multimerized region II sequence elements enhanced the activity of a heterologous thymidine kinase promoter in monocytic cells but not other cell types tested.
@@ -2519,6 +2525,8 @@ Pretreatment of cells with protein tyrosine kinase inhibitors and the dominant n
 In comparison to other activators of NF-kappa B such as phorbol myristate acetate or tumor necrosis factor, we did not detect changes in the tyrosine phosphorylation status of I kappa B alpha following treatment with either of these agents.
 
 In most HIV-1 isolates in which this PU box was not conserved, it was replaced by a binding site for the related factor Ets1.
+
+Factors binding to site C (nt 4681 to 4701) had a DNA-binding specificity similar to that of factors binding to site B, except for PU.1/Spi-1.
 
 We found that transactivation of the HIV-1 LTR by v-src was more sensitive to mutations of the proximal, rather than the distal, kappa B element.
 
@@ -3711,6 +3719,8 @@ In contrast, activation in THP-1 cells occurred in the absence of vanadate and w
 We first demonstrate that an HIV-1 provirus (SF-2 strain) very effectively replicates in thymocytes cocultured with TEC whereas this provirus, with kappaB sites deleted, fails to replicate.
 
 Incubation of endothelial cells with oleate for 72 hours decreased the relative proportions of saturated (palmitic and stearic) acids in total cell lipids and increased the proportions of oleate in total cell lipids without significantly changing the relative proportions of polyunsaturated fatty acids.
+
+We further show that Nmi interacts with all STATs except Stat2.
 
 Interestingly, Nmi lacks an intrinsic transcriptional activation domain; instead, Nmi enhances the association of CBP/p300 coactivator proteins with Stat1 and Stat5, and together with CBP/p300 can augment IL-2- and IFNgamma-dependent transcription.
 

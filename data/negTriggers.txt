@@ -6,6 +6,7 @@ neither
 nor
 never
 without
+except
 rather than
 absent
 unable
