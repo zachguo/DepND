@@ -8,6 +8,7 @@ Negation detection using dependency parsing.
 * Separate text input into sentences.
 * Search for negation triggers throughout each sentence.
 * For sentences containing negation triggers, parse each of them using a dependency parser.
+> [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae is used as the dependency parser.
 * Use parsed tree and rules to determine the scope of negation.
 * Extract keywords or entities in the scope of negation.
 
@@ -37,23 +38,23 @@ Negation detection using dependency parsing.
 ### Additions:
 #### Minor rules:
 
-* *ggMST*
-> maximal spanning tree from the immediate governor of the immediate governor of a given node;
 * *$_Elevate* 
 > elevate through all possible $ arcs then do a default MST (either sMST or gMST);
 * *SUB&Right* 
-> only span towards right and span through SUB arc, span nothing if there's no SUB arc or right part.
+> only span towards right or span left through SUB arc, span nothing if there's no SUB arc or right part.
+* *ggMST*
+> maximal spanning tree from the immediate governor of the immediate governor of a given node;
 
 #### Situations that cannot be coped with default rules:
 
 | trigger | trg_pos | trg_dep | governor | gvn_pos | gvn_dep | Rule | Additional Rules |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| not | RB | DEP | but,and | CC | NMOD | ggMST | or *CC_Elevate*; *SUB&Right* |
+| not | RB | DEP | but,and | CC | NMOD | ggMST | or *DEP_Elevate*; *SUB&Right* |
 | not | RB | PMOD | in | IN | PMOD |gMST| PMOD arc *can* cross punctuation?|
 | not | RB | VMOD | does,did,is | VBZ | ROOT | gMST | *cannot* span left towards "Although/IN", "Therefore/RB", "Moreover/RB" or "like/IN" through a VMOD arc; or *SUB&Right* |
 | hardly | RB | AMOD | any | DT | NMOD | ggMST | or *AMOD_Elevate* |
 | never | RB | NMOD | effect | NN | OBJ | gMST | *SUB&Right* |
-| rather (than) | RB | PMOD | for | IN | | gMST | *SUB&Right* and only keep words whose indice are larger than that of "rather than" |
+| rather (than) | RB | PMOD | for | IN | | gMST | *SUB&Right* and only keep words whose indices are larger than that of "rather than" |
 | negative | JJ | NMOD | regulation, factors | NN, NNS | ROOT, PMOD | gMST | only span through of/IN NMOD arc; "factors" has no children |
 | absence | NN | PMOD | in | IN | NMOD | gMST | *PMOD_Elevate* |
 | none | NN | SUB | had | VBD | ROOT | gMST | *SUB&Right* |
@@ -63,13 +64,13 @@ Negation detection using dependency parsing.
 | denied | VBN | VC | are | VBP | ROOT | gMST | only span through SUB arc |
 | excluded | VBN | VC | be | VB | VC | ggMST | or *VC_Elevate* |
 
-### Rules are vulnerable to:
+### Performance of designed rules are vulnerable to:
 
 * Performance of PP attachment in the parser;
 > e.g. The PP "on sth" in "no effect on sth" is often wrongly attached to other NN rather than effect. As a result, one must design more complicated scope rules rather than a simple gMST.
 
 * Inconsistency of decision in whether including the left part of parsed tree governed by a SUB arc.
-> A safer solution may be just flow through towards right. Sacrifice false negative for false positive. If one want to include the part governed by a SUB arc, it's safer to avoid flowing across or just span through the SUB arc.
+> e.g. In BioScope corpus, human annotator sometimes include but sometimes exclude subject of the sentence in the negation scope. A safer solution may be just flow through towards right. Sacrifice false negative for false positive. If one want to include the part governed by a SUB arc, it's safer to avoid flowing across or just span through the SUB arc.
 
 ## Procedures after determining the scope
 * Coping with double/triple negation.
