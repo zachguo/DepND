@@ -41,7 +41,7 @@ Negation detection using dependency parsing.
 * *$_Elevate* 
 > elevate through all possible $ arcs then do a default MST (either sMST or gMST);
 * *SUB&Right* 
-> only span towards right or span left through SUB arc, span nothing if there's no SUB arc or right part.
+> only span towards right or span left through SUB arc, span nothing if there's no SUB arc or right part. (notice that this rule only apply to root node)
 * *ggMST*
 > maximal spanning tree from the immediate governor of the immediate governor of a given node;
 
