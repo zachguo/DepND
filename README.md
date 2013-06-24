@@ -7,8 +7,9 @@ Negation detection using dependency parsing.
 
 * Separate text input into sentences.
 * Search for negation triggers throughout each sentence.
-* For sentences containing negation triggers, parse each of them using a dependency parser.
+* For sentences containing negation triggers, parse each of them using a dependency parser.  
 > [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae is used as the dependency parser.
+
 * Use parsed tree and rules to determine the scope of negation.
 * Extract keywords or entities in the scope of negation.
 
@@ -45,13 +46,13 @@ Negation detection using dependency parsing.
 * *ggMST*
 > maximal spanning tree from the immediate governor of the immediate governor of a given node;
 
-#### Situations that cannot be coped with default rules:
+#### Exceptions that cannot be coped with default rules:
 
-| trigger | trg_pos | trg_dep | governor | gvn_pos | gvn_dep | Rule | Additional Rules |
+| trg | trg_pos | trg_dep | gvn | gvn_pos | gvn_dep | rule | comment |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| not | RB | DEP | but,and | CC | NMOD | ggMST | or *DEP_Elevate*; *SUB&Right* |
+| not | RB | DEP | but, and | CC | NMOD | ggMST | or *DEP_Elevate*; *SUB&Right* |
 | not | RB | PMOD | in | IN | PMOD |gMST| PMOD arc *can* cross punctuation?|
-| not | RB | VMOD | does,did,is | VBZ | ROOT | gMST | *cannot* span left towards "Although/IN", "Therefore/RB", "Moreover/RB" or "like/IN" through a VMOD arc; or *SUB&Right* |
+| not | RB | VMOD | does, did, is | VBZ | ROOT | gMST | *cannot* span left towards "Although/IN", "Therefore/RB", "Moreover/RB" or "like/IN" through a VMOD arc; or *SUB&Right* |
 | hardly | RB | AMOD | any | DT | NMOD | ggMST | or *AMOD_Elevate* |
 | never | RB | NMOD | effect | NN | OBJ | gMST | *SUB&Right* |
 | rather (than) | RB | PMOD | for | IN | | gMST | *SUB&Right* and only keep words whose indices are larger than that of "rather than" |
@@ -60,7 +61,7 @@ Negation detection using dependency parsing.
 | none | NN | SUB | had | VBD | ROOT | gMST | *SUB&Right* |
 | without | IN | PMOD | with | IN | PMOD | gMST | only span through PMOD towards right |
 | lack | VBP | SBAR | | | | sMST | forbid VMOD branching to MD or VB* |
-| lacking | VBG | VC | is | VBZ | SUB | gMST | SUB arc can span across punctuations |
+| lacking | VBG | VC | is | VBZ | SUB | gMST | SUB arc can span across punctuations; notice that sMST is appropriate for most "lacking" |
 | denied | VBN | VC | are | VBP | ROOT | gMST | only span through SUB arc |
 | excluded | VBN | VC | be | VB | VC | ggMST | or *VC_Elevate* |
 

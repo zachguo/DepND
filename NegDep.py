@@ -103,6 +103,13 @@ class DepNegEx(DepNeg):
         for i in sentwrapper.get_indice():
             if sentwrapper.get_words()[i-1].lower() in self.NegTriggers:
                 sentwrapper.add_NegIndex(i)
+            ## deal with phrases
+            elif sentwrapper.get_words()[i-1].lower() == 'rather':
+                if sentwrapper.get_words()[i].lower() == 'than':
+                    sentwrapper.add_NegIndex(i)
+            elif any(sentwrapper.get_words()[i-1].lower() == trg for trg in ['rule','rules','ruled','ruling']):
+                if sentwrapper.get_words()[i].lower() == 'out':
+                    sentwrapper.add_NegIndex(i)
         return sentwrapper.get_NegIndice()
                 
     def MST(self, i_root, i_neg, sentwrapper):
@@ -142,7 +149,7 @@ class DepNegEx(DepNeg):
             if sentwrapper.get_dep()[index[0]-1] == 'P' and index[1] == False:
                 if index[0] < i_punc:
                     i_punc = index[0]
-        ##  delete non-purebred punctuation and all non-purebred nodes out of this non-purebred punctuation
+        ## delete non-purebred punctuation and all non-purebred nodes out of this non-purebred punctuation
         for index in indices:
             if index[0] >= i_punc and index[1] == False:
                 indices.remove(index)
@@ -171,9 +178,13 @@ class DepNegEx(DepNeg):
 
     def indice2result(self, indices, i_neg, sentwrapper):
         words = sentwrapper.get_words()
-        words[i_neg-1] = '<NEG>'+words[i_neg-1]+'</NEG>'
+        if any(words[i_neg-1] == trg for trg in ['rather','rule','ruling','rules','ruled']):
+            words[i_neg-1] = '<NEG>'+words[i_neg-1]
+            words[i_neg] += '</NEG>'
+        else:
+            words[i_neg-1] = '<NEG>'+words[i_neg-1]+'</NEG>'
         words[indices[0]-1] = '<SCOPE>'+words[indices[0]-1]
-        words[indices[-1]-1] = words[indices[-1]-1]+'</SCOPE>'
+        words[indices[-1]-1] += '</SCOPE>'
         ## however, there may be actually gap within the scope
         return ' '.join(words)
 
@@ -228,7 +239,6 @@ class DepNegEx(DepNeg):
 ## test run
 trigger_filepath = "./data/negTriggers.txt"
 test_filepath = "./data/test_toy2.txt"
-#test_filepath = "/Users/siyuanguo/GoogleDrive/Corpora/NegationDetectionCorpora/cleaned/PlainTextNoTag/bioscope_abstracts_cleaned.txt"
 toy = DepNegEx(trigger_filepath, test_filepath)
 toy.run_parse()
 toy.run_DepNegEx()
