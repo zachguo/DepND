@@ -2,15 +2,16 @@
 
 import os
 import re
+import sys
 from collections import defaultdict
 
 class DepNeg():
 
-    def __init__(self, trigger_filepath, test_filepath, result_filepath="./data/result.txt"):
+    def __init__(self, trigger_filepath, test_filepath, result_filepath):
         self.trigger_filepath = trigger_filepath
         self.test_filepath = test_filepath
         self.result_filepath = result_filepath
-        self.trimmed_filepath = "./data/test_trimmed"
+        self.trimmed_filepath = "./data/test_filtered"
         self.parsed_filepath = "./data/parsed"
         self.read_NegTriggers()
 
@@ -29,14 +30,18 @@ class DepNeg():
         print "Start reading test file ..."
         # read text file for analysis
         # finding whether a sentence containing negation triggers
-        # aggregate all sentences containing negation into a single text file, one sentence per line
+        # aggregate/filter all sentences containing negation into a single text file, one sentence per line
         with open(self.trimmed_filepath,'w') as tfout:
             with open(self.test_filepath,'r') as tfin:
                 for line in tfin:
                     line = line.strip()
                     if line:
                         for trigger in self.NegTriggers:
-                            pattern = re.compile(r'\b'+trigger+r'\b',re.IGNORECASE)
+                            ## filter phrases like "no problem/trouble/matter"
+                            if trigger == 'no':
+                                pattern = re.compile(r'\b'+trigger+r'(?!( problem| trouble| matter))\b',re.IGNORECASE)
+                            else:
+                                pattern = re.compile(r'\b'+trigger+r'\b',re.IGNORECASE)
                             if pattern.search(line):
                                 tfout.write(line+"\n\n")
                                 break
@@ -44,7 +49,7 @@ class DepNeg():
     def parse(self):
         # run gDep to produce denpency trees from plain text sentence
         cmd = "./gdep "+self.trimmed_filepath+" > "+self.parsed_filepath
-        print "Start parsing ... (this may take several minutes, please wait.)"
+        print "Start POS tagging, chunking, NER, and parsing ... (this may take several minutes, please wait.)"
         os.system(cmd)
 
     def run_parse(self):
@@ -236,9 +241,15 @@ class DepNegEx(DepNeg):
 
 
 
-## test run
-trigger_filepath = "./data/negTriggers.txt"
-test_filepath = "./data/test_toy2.txt"
-toy = DepNegEx(trigger_filepath, test_filepath)
-toy.run_parse()
-toy.run_DepNegEx()
+## run following command to execute this program:
+## python NegDepEx.py ./data/negTriggers.txt ./data/test_toy2.txt ./data/result.txt
+args = sys.argv
+if len(args) != 4:
+    print "Arguments Error: please give 3 arguments - trigger_filepath, test_filepath, result_filepath."
+else:
+    trigger_filepath = args[1]
+    test_filepath = args[2]
+    result_filepath = args[3]
+    toy = DepNegEx(trigger_filepath, test_filepath, result_filepath)
+    toy.run_parse()
+    toy.run_DepNegEx()
