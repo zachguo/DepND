@@ -64,6 +64,7 @@ Negation detection using dependency parsing.
 
 * *$_Elevate* 
 > elevate root node through all possible $ arcs then do a default MST (either sMST or gMST);
+
 * *SUB&Right* 
 > only span towards right or span left through SUB arc, span nothing if there's no SUB arc or right part. (notice that this rule only apply to root node)
 
