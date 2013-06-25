@@ -102,7 +102,7 @@ class SENT():
         return self.indices == []
     
 
-class DepNegEx(DepNeg):
+class DepND(DepNeg):
 
     def findNeg(self, sentwrapper):
         for i in sentwrapper.get_indice():
@@ -222,7 +222,7 @@ class DepNegEx(DepNeg):
                 result += self.indice2result(self.MST(i_root,i_neg,sentwrapper), i_neg, sentwrapper)+'\n'
         return result
 
-    def run_DepNegEx(self):
+    def run_DepND(self):
         # 1. read one sentence, find negation trigger words in the sentence;
         # 2. run corresponding rules to determine scope, return the index range for the scope.
         print "Start generating scope for negation triggers ..."
@@ -250,6 +250,6 @@ else:
     trigger_filepath = args[1]
     test_filepath = args[2]
     result_filepath = args[3]
-    toy = DepNegEx(trigger_filepath, test_filepath, result_filepath)
+    toy = DepND(trigger_filepath, test_filepath, result_filepath)
     toy.run_parse()
-    toy.run_DepNegEx()
+    toy.run_DepND()
