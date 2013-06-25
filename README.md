@@ -6,11 +6,14 @@ Negation detection using dependency parsing.
 ## Basic Procedures ##
 
 * Separate text input into sentences.
+
 * Filter all sentences not containing negation triggers.
+
 * For sentences containing negation triggers, parse each of them using a dependency parser.  
 > using [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae.
 
 * Use parsed tree and rules to determine the scope of negation.
+
 * Extract keywords or entities within these scopes.
 
 ## Rules for determining scope
@@ -21,8 +24,10 @@ Negation detection using dependency parsing.
 
 * *gMST*
 > maximal spanning tree from its immediate governor;
+
 * *sMST*
 > maximal spanning tree from itself;
+
 * *withinPUNC*
 > All MST rules *should not cross punctuation marks* during spanning, no matter it spans towards left or right (relatively to the position of trigger word). But maybe some arcs can (such as SUB, OBJ and PRD).
 
