@@ -39,7 +39,11 @@ class DepNeg():
                         for trigger in self.NegTriggers:
                             ## filter phrases like "no problem/trouble/matter"
                             if trigger == 'no':
-                                pattern = re.compile(r'\b'+trigger+r'(?!( problem| trouble| matter))\b',re.IGNORECASE)
+                                pattern = re.compile(r'\b'+trigger+r'(?!( problem| trouble| matter| further))\b',re.IGNORECASE)
+                            elif trigger == 'not':
+                                pattern = re.compile(r'\b'+trigger+r'(?!( certain| necessarily))\b',re.IGNORECASE)
+                            elif trigger == 'without':
+                                pattern = re.compile(r'\b'+trigger+r'(?!( difficuly| further| any further))\b',re.IGNORECASE)
                             else:
                                 pattern = re.compile(r'\b'+trigger+r'\b',re.IGNORECASE)
                             if pattern.search(line):
