@@ -3,6 +3,10 @@ DepNegEx
 
 Negation detection using dependency parsing.
 
+## How to use:
+1. Put your testing data in a suitable directory.
+2. Run the command `python DepND.py ./data/negTriggers.txt YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`. e.g. `python DepND.py ./data/negTriggers.txt ./data/bioscope_abstracts_cleaned.txt ./data/result.txt`
+
 ## Basic Procedures ##
 
 * Separate text input into sentences.

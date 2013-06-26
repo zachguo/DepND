@@ -242,7 +242,7 @@ class DepND(DepNeg):
 
 
 ## run following command to execute this program:
-## python NegDepEx.py ./data/negTriggers.txt ./data/test_toy2.txt ./data/result.txt
+## python DepND.py ./data/negTriggers.txt ./data/bioscope_abstracts_cleaned.txt ./data/result.txt
 args = sys.argv
 if len(args) != 4:
     print "Arguments Error: please give 3 arguments - trigger_filepath, test_filepath, result_filepath."
