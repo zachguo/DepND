@@ -11,8 +11,8 @@ class DepNeg():
         self.trigger_filepath = trigger_filepath
         self.test_filepath = test_filepath
         self.result_filepath = result_filepath
-        self.trimmed_filepath = "./data/test_filtered"
-        self.parsed_filepath = "./data/parsed"
+        self.trimmed_filepath = "./data/tmp/test_filtered"
+        self.parsed_filepath = "./data/tmp/parsed"
         self.read_NegTriggers()
 
     def read_NegTriggers(self):
@@ -194,7 +194,7 @@ class DepND(DepNeg):
             words[i_neg-1] = '<NEG>'+words[i_neg-1]+'</NEG>'
         words[indices[0]-1] = '<SCOPE>'+words[indices[0]-1]
         words[indices[-1]-1] += '</SCOPE>'
-        ## however, there may be actually gap within the scope
+        ## there may be actually gap within the scope
         return ' '.join(words)
 
     def elevate(self, i, sentwrapper):
@@ -246,14 +246,15 @@ class DepND(DepNeg):
 
 
 ## run following command to execute this program:
-## python DepND.py ./data/negTriggers.txt ./data/bioscope_abstracts_cleaned.txt ./data/result.txt
-args = sys.argv
-if len(args) != 4:
-    print "Arguments Error: please give 3 arguments - trigger_filepath, test_filepath, result_filepath."
-else:
-    trigger_filepath = args[1]
-    test_filepath = args[2]
-    result_filepath = args[3]
-    toy = DepND(trigger_filepath, test_filepath, result_filepath)
-    toy.run_parse()
-    toy.run_DepND()
+## python DepND.py ./data/negTriggers.txt ./data/testing/bioscope_abstracts_cleaned.txt ./data/result.txt
+if __name__ == '__main__':
+    args = sys.argv
+    if len(args) != 4:
+        print "Arguments Error: please give 3 arguments - trigger_filepath, test_filepath, result_filepath."
+    else:
+        trigger_filepath = args[1]
+        test_filepath = args[2]
+        result_filepath = args[3]
+        toy = DepND(trigger_filepath, test_filepath, result_filepath)
+        toy.run_parse()
+        toy.run_DepND()
