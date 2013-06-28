@@ -41,7 +41,7 @@ class DepNeg():
                             if trigger == 'no':
                                 pattern = re.compile(r'\b'+trigger+r'(?!( problem| trouble| matter| further))\b',re.IGNORECASE)
                             elif trigger == 'not':
-                                pattern = re.compile(r'\b'+trigger+r'(?!( certain| necessarily))\b',re.IGNORECASE)
+                                pattern = re.compile(r'\b'+trigger+r'(?!( certain| necessarily| only))\b',re.IGNORECASE)
                             elif trigger == 'without':
                                 pattern = re.compile(r'\b'+trigger+r'(?!( difficuly| further| any further))\b',re.IGNORECASE)
                             else:
@@ -119,6 +119,20 @@ class DepND(DepNeg):
             elif any(sentwrapper.get_words()[i-1].lower() == trg for trg in ['rule','rules','ruled','ruling']):
                 if sentwrapper.get_words()[i].lower() == 'out':
                     sentwrapper.add_NegIndex(i)
+            ## deal with subjunctive mood
+            elif any(sentwrapper.get_words()[i-1].lower() == trg for trg in ['would','could']):
+                candidates = {}
+                for j in sentwrapper.get_indice():
+                    if sentwrapper.get_arc_end()[j-1] == i:
+                        candidates[j] = [sentwrapper.get_words()[j-1], sentwrapper.get_POS()[j-1], sentwrapper.get_dep()[j-1]]
+                for j in candidates:
+                    if candidates[j] == ['if','IN','VMOD']:
+                        for k in candidates:
+                            if candidates[k][1:] == ['VB','VC']:
+                                sentwrapper.add_NegIndex(j)
+                                sentwrapper.add_NegIndex(k)
+#            elif sentwrapper.get_words()[i-1].lower() == 'wish':
+
         return sentwrapper.get_NegIndice()
                 
     def MST(self, i_root, i_neg, sentwrapper):
@@ -212,18 +226,19 @@ class DepND(DepNeg):
     def getNegScope(self, sentwrapper):
         result = ''
         indice_neg = self.findNeg(sentwrapper)
-        tagset_gMST = set(['RB','DT','JJ','CC'])
-        tagset_sMST = set(['NN','IN','VB','VBD','VBG','VBN','VBP','VBZ'])
-        for i_neg in indice_neg:
-            ## sMST rule
-            if sentwrapper.get_POS()[i_neg-1] in tagset_sMST:
-                i_root = self.elevate(i_neg, sentwrapper)
-                result += self.indice2result(self.MST(i_root,i_neg,sentwrapper), i_neg, sentwrapper)+'\n'
-            ## gMST rule
-            if sentwrapper.get_POS()[i_neg-1] in tagset_gMST:
-                i_root = self.elevate(i_neg, sentwrapper)
-                i_root = sentwrapper.get_arc_end()[i_root-1]
-                result += self.indice2result(self.MST(i_root,i_neg,sentwrapper), i_neg, sentwrapper)+'\n'
+        if indice_neg != []:
+            tagset_gMST = set(['RB','DT','JJ','CC'])
+            tagset_sMST = set(['NN','IN','VB','VBD','VBG','VBN','VBP','VBZ','MD'])
+            for i_neg in indice_neg:
+                ## sMST rule
+                if sentwrapper.get_POS()[i_neg-1] in tagset_sMST:
+                    i_root = self.elevate(i_neg, sentwrapper)
+                    result += self.indice2result(self.MST(i_root,i_neg,sentwrapper), i_neg, sentwrapper)+'\n'
+                ## gMST rule
+                if sentwrapper.get_POS()[i_neg-1] in tagset_gMST:
+                    i_root = self.elevate(i_neg, sentwrapper)
+                    i_root = sentwrapper.get_arc_end()[i_root-1]
+                    result += self.indice2result(self.MST(i_root,i_neg,sentwrapper), i_neg, sentwrapper)+'\n'
         return result
 
     def run_DepND(self):

@@ -38,3 +38,6 @@ absence
 none
 lack
 failure
+would
+could
+wish

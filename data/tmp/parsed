@@ -1,0 +1,43 @@
+1	If	If	B-SBAR	IN	O	11	VMOD
+2	human	human	B-NP	JJ	O	4	SUB
+3	being	be	I-NP	VBG	O	2	NMOD
+4	were	be	B-VP	VBD	O	1	SBAR
+5	not	not	I-VP	RB	O	4	VMOD
+6	killing	kill	I-VP	VBG	O	4	VC
+7	one	one	B-NP	CD	O	6	OBJ
+8	another	another	I-NP	DT	O	7	NMOD
+9	,	,	O	,	O	11	P
+10	we	we	B-NP	PRP	O	11	SUB
+11	could	could	B-VP	MD	O	0	ROOT
+12	live	live	I-VP	VB	O	11	VC
+13	a	a	B-NP	DT	O	15	NMOD
+14	happier	happy	I-NP	JJR	O	15	NMOD
+15	life	life	I-NP	NN	O	12	OBJ
+16	.	.	O	.	O	11	P
+
+1	If	If	B-SBAR	IN	O	8	VMOD
+2	I	I	B-NP	PRP	O	3	SUB
+3	cooked	cook	B-VP	VBD	O	1	SBAR
+4	dinner	dinner	B-NP	NN	O	3	OBJ
+5	,	,	O	,	O	8	P
+6	no	no	B-NP	DT	O	7	NMOD
+7	one	one	I-NP	PRP	O	8	SUB
+8	would	would	B-VP	MD	O	0	ROOT
+9	eat	eat	I-VP	VB	O	8	VC
+10	it	it	B-NP	PRP	O	9	OBJ
+11	.	.	O	.	O	8	P
+
+1	If	If	B-SBAR	IN	O	9	VMOD
+2	I	I	B-NP	PRP	O	3	SUB
+3	had	have	B-VP	VBD	O	1	SBAR
+4	cooked	cook	I-VP	VBN	O	5	NMOD
+5	dinner	dinner	B-NP	NN	O	3	OBJ
+6	,	,	O	,	O	9	P
+7	no	no	B-NP	DT	O	8	NMOD
+8	one	one	I-NP	PRP	O	9	SUB
+9	would	would	B-VP	MD	O	0	ROOT
+10	have	have	I-VP	VB	O	9	VC
+11	eaten	eat	I-VP	VBN	O	10	VC
+12	it	it	B-NP	PRP	O	11	OBJ
+13	.	.	O	.	O	9	P
+
