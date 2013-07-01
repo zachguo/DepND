@@ -4,8 +4,7 @@ DepNegEx
 Negation detection using dependency parsing.
 
 ## How to use:
-1. Put your testing data in a suitable directory.
-2. Run the command `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`. e.g. `python DepND.py ./data/bioscope_abstracts_cleaned.txt ./data/result.txt`
+Run the command `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`. e.g. `python DepND.py ./data/bioscope_abstracts_cleaned.txt ./data/result.txt`
 
 ## Basic Procedures ##
 
@@ -16,9 +15,9 @@ Negation detection using dependency parsing.
 * For sentences containing negation triggers, parse each of them using a dependency parser.  
 > using [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae, please see `GDep_README` for more details.
 
-* Use parsed tree and rules to determine the scope of negation.
+* Use parse tree and rules to determine the scope of negation.
 
-* Extract keywords or entities within these scopes.
+* Extract keywords or entities within these scopes if you like.
 
 ## Rules for determining scope
 

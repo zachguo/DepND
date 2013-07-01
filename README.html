@@ -297,11 +297,7 @@ pre {
 
 <h2>How to use:</h2>
 
-<ol>
-<li>Put your testing data in a suitable directory.</li>
-<li>Run the command <code>python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH</code>. e.g. <code>python DepND.py ./data/bioscope_abstracts_cleaned.txt ./data/result.txt</code></li>
-</ol>
-
+<p>Run the command <code>python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH</code>. e.g. <code>python DepND.py ./data/bioscope_abstracts_cleaned.txt ./data/result.txt</code></p>
 
 <h2>Basic Procedures</h2>
 
@@ -311,8 +307,8 @@ pre {
 <li><p>For sentences containing negation triggers, parse each of them using a dependency parser.</p>
 
 <blockquote><p>using <a href="http://people.ict.usc.edu/~sagae/parser/gdep/">GDep beta2</a> created by Prof. Kenji Sagae, please see <code>GDep_README</code> for more details.</p></blockquote></li>
-<li><p>Use parsed tree and rules to determine the scope of negation.</p></li>
-<li><p>Extract keywords or entities within these scopes.</p></li>
+<li><p>Use parse tree and rules to determine the scope of negation.</p></li>
+<li><p>Extract keywords or entities within these scopes if you like.</p></li>
 </ul>
 
 
