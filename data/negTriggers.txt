@@ -7,7 +7,6 @@ nor
 never
 without
 except
-rather than
 absent
 unlike
 unable
@@ -30,14 +29,15 @@ excluding
 lacks
 lacked
 lacking
-rule out
-rules out
-ruled out
-ruling out
 absence
 none
 lack
 failure
+rule out
+rules out
+ruled out
+ruling out
+rather than
 would
 could
 wish

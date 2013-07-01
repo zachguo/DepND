@@ -299,7 +299,7 @@ pre {
 
 <ol>
 <li>Put your testing data in a suitable directory.</li>
-<li>Run the command <code>python DepND.py ./data/negTriggers.txt YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH</code>. e.g. <code>python DepND.py ./data/negTriggers.txt ./data/bioscope_abstracts_cleaned.txt ./data/result.txt</code></li>
+<li>Run the command <code>python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH</code>. e.g. <code>python DepND.py ./data/bioscope_abstracts_cleaned.txt ./data/result.txt</code></li>
 </ol>
 
 
@@ -310,7 +310,7 @@ pre {
 <li><p>Filter all sentences not containing negation triggers.</p></li>
 <li><p>For sentences containing negation triggers, parse each of them using a dependency parser.</p>
 
-<blockquote><p>using <a href="http://people.ict.usc.edu/~sagae/parser/gdep/">GDep beta2</a> created by Prof. Kenji Sagae.</p></blockquote></li>
+<blockquote><p>using <a href="http://people.ict.usc.edu/~sagae/parser/gdep/">GDep beta2</a> created by Prof. Kenji Sagae, please see <code>GDep_README</code> for more details.</p></blockquote></li>
 <li><p>Use parsed tree and rules to determine the scope of negation.</p></li>
 <li><p>Extract keywords or entities within these scopes.</p></li>
 </ul>
@@ -540,6 +540,7 @@ pre {
 <blockquote><ul>
 <li>P.S. Whether some exceptions (e.g. "negative", "without", "lack" in above table) arose depends on the performance of the dependency parser.</li>
 <li><em>ggMST</em> (double "g" indicates governor of governor) can be replaced by <em>$_Elevate</em>.</li>
+<li>There're also minor rules to deal with subjunctive moods.</li>
 </ul>
 </blockquote>
 

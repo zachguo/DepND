@@ -7,8 +7,8 @@ from collections import defaultdict
 
 class DepNeg():
 
-    def __init__(self, trigger_filepath, test_filepath, result_filepath):
-        self.trigger_filepath = trigger_filepath
+    def __init__(self, test_filepath, result_filepath):
+        self.trigger_filepath = "./data/negTriggers.txt"
         self.test_filepath = test_filepath
         self.result_filepath = result_filepath
         self.trimmed_filepath = "./data/tmp/test_filtered"
@@ -24,7 +24,7 @@ class DepNeg():
                 line = line.strip()
                 if line:
                     self.NegTriggers.append(line)
-        #print "All negation triggers are\n", self.NegTriggers
+        print "All negation triggers are\n", self.NegTriggers
 
     def read_TestFile(self):
         print "Start reading test file ..."
@@ -109,8 +109,9 @@ class SENT():
 class DepND(DepNeg):
 
     def findNeg(self, sentwrapper):
+        core_triggers = self.NegTriggers[:35] #change this index when you changed core negation triggers.
         for i in sentwrapper.get_indice():
-            if sentwrapper.get_words()[i-1].lower() in self.NegTriggers:
+            if sentwrapper.get_words()[i-1].lower() in core_triggers:
                 sentwrapper.add_NegIndex(i)
             ## deal with phrases
             elif sentwrapper.get_words()[i-1].lower() == 'rather':
@@ -124,14 +125,22 @@ class DepND(DepNeg):
                 candidates = {}
                 for j in sentwrapper.get_indice():
                     if sentwrapper.get_arc_end()[j-1] == i:
-                        candidates[j] = [sentwrapper.get_words()[j-1], sentwrapper.get_POS()[j-1], sentwrapper.get_dep()[j-1]]
+                        candidates[j] = [sentwrapper.get_words()[j-1].lower(), sentwrapper.get_POS()[j-1], sentwrapper.get_dep()[j-1]]
                 for j in candidates:
                     if candidates[j] == ['if','IN','VMOD']:
                         for k in candidates:
                             if candidates[k][1:] == ['VB','VC']:
                                 sentwrapper.add_NegIndex(j)
-                                sentwrapper.add_NegIndex(k)
-#            elif sentwrapper.get_words()[i-1].lower() == 'wish':
+                                sentwrapper.add_NegIndex(i)
+            elif sentwrapper.get_words()[i-1].lower() == 'wish':
+                if sentwrapper.get_POS()[i-1] == 'VBP':
+                    candidates = {}
+                    for j in sentwrapper.get_indice():
+                        if sentwrapper.get_arc_end()[j-1] == i:
+                            candidates[j] = [sentwrapper.get_words()[j-1].lower(), sentwrapper.get_POS()[j-1], sentwrapper.get_dep()[j-1]]
+                    for k in candidates:
+                        if candidates[k][1:] == ['VBD','VMOD']:
+                            sentwrapper.add_NegIndex(k)
 
         return sentwrapper.get_NegIndice()
                 
@@ -217,6 +226,7 @@ class DepND(DepNeg):
         eDict['RB'] = ['DEP', 'AMOD']
         eDict['NN'] = ['PMOD']
         eDict['VBN'] = ['VC']
+        eDict['VB'] = ['VC']
         dep_elevate = eDict[sentwrapper.get_POS()[i-1]]
         dep = sentwrapper.get_dep()
         while dep[i-1] in dep_elevate:
@@ -261,15 +271,14 @@ class DepND(DepNeg):
 
 
 ## run following command to execute this program:
-## python DepND.py ./data/negTriggers.txt ./data/testing/bioscope_abstracts_cleaned.txt ./data/result.txt
+## python DepND.py ./data/testing/bioscope_abstracts_cleaned.txt ./data/result.txt
 if __name__ == '__main__':
     args = sys.argv
-    if len(args) != 4:
-        print "Arguments Error: please give 3 arguments - trigger_filepath, test_filepath, result_filepath."
+    if len(args) != 3:
+        print "Arguments Error: please give 2 arguments - test_filepath, result_filepath."
     else:
-        trigger_filepath = args[1]
-        test_filepath = args[2]
-        result_filepath = args[3]
-        toy = DepND(trigger_filepath, test_filepath, result_filepath)
+        test_filepath = args[1]
+        result_filepath = args[2]
+        toy = DepND(test_filepath, result_filepath)
         toy.run_parse()
         toy.run_DepND()

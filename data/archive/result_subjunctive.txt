@@ -1,0 +1,31 @@
+I would have liked it <SCOPE><NEG>if</NEG> this camera had aperture control</SCOPE> .
+<SCOPE>I <NEG>would</NEG> have liked it if this camera had aperture control .</SCOPE>
+
+If <SCOPE>human being were <NEG>not</NEG> killing one another</SCOPE> , we could live a happier life .
+<SCOPE><NEG>If</NEG> human being were not killing one another</SCOPE> , we could live a happier life .
+If human being were not killing one another , <SCOPE>we <NEG>could</NEG> live a happier life</SCOPE> .
+
+I wish <SCOPE>it <NEG>were</NEG> true</SCOPE> .
+
+I wish <SCOPE>she <NEG>were</NEG> here</SCOPE> .
+
+<SCOPE><NEG>If</NEG> I were you</SCOPE> , I would run .
+If I were you , <SCOPE>I <NEG>would</NEG> run</SCOPE> .
+
+<SCOPE><NEG>If</NEG> I saw you</SCOPE> , I would be happy .
+If I saw you , <SCOPE>I <NEG>would</NEG> be happy</SCOPE> .
+
+If I cooked dinner , <SCOPE><NEG>no</NEG> one</SCOPE> would eat it .
+<SCOPE><NEG>If</NEG> I cooked dinner</SCOPE> , no one would eat it .
+If I cooked dinner , <SCOPE>no one <NEG>would</NEG> eat it</SCOPE> .
+
+<SCOPE><NEG>If</NEG> I had been you</SCOPE> , I would have run .
+If I had been you , <SCOPE>I <NEG>would</NEG> have run</SCOPE> .
+
+<SCOPE><NEG>If</NEG> I had seen you</SCOPE> , I would have been happy .
+If I had seen you , <SCOPE>I <NEG>would</NEG> have been happy</SCOPE> .
+
+If I had cooked dinner , <SCOPE><NEG>no</NEG> one</SCOPE> would have eaten it .
+<SCOPE><NEG>If</NEG> I had cooked dinner</SCOPE> , no one would have eaten it .
+If I had cooked dinner , <SCOPE>no one <NEG>would</NEG> have eaten it</SCOPE> .
+

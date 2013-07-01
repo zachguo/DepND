@@ -5,7 +5,7 @@ Negation detection using dependency parsing.
 
 ## How to use:
 1. Put your testing data in a suitable directory.
-2. Run the command `python DepND.py ./data/negTriggers.txt YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`. e.g. `python DepND.py ./data/negTriggers.txt ./data/bioscope_abstracts_cleaned.txt ./data/result.txt`
+2. Run the command `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`. e.g. `python DepND.py ./data/bioscope_abstracts_cleaned.txt ./data/result.txt`
 
 ## Basic Procedures ##
 
@@ -14,7 +14,7 @@ Negation detection using dependency parsing.
 * Filter all sentences not containing negation triggers.
 
 * For sentences containing negation triggers, parse each of them using a dependency parser.  
-> using [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae.
+> using [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae, please see `GDep_README` for more details.
 
 * Use parsed tree and rules to determine the scope of negation.
 
@@ -68,6 +68,7 @@ Negation detection using dependency parsing.
 
 > * P.S. Whether some exceptions (e.g. "negative", "without", "lack" in above table) arose depends on the performance of the dependency parser.
 > * *ggMST* (double "g" indicates governor of governor) can be replaced by *$_Elevate*.
+> * There're also minor rules to deal with subjunctive moods.
 
 #### So, add some minor rules:
 
