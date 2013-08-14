@@ -17,7 +17,7 @@ class DepNeg():
 
     def read_NegTriggers(self):
         print "Start reading negation triggers ..."
-        # read triggers, one trigger per line
+        ## read triggers, one trigger per line
         self.NegTriggers = []
         with open(self.trigger_filepath,'r') as fin:
             for line in fin:
@@ -28,9 +28,9 @@ class DepNeg():
 
     def read_TestFile(self):
         print "Start reading test file ..."
-        # read text file for analysis
-        # finding whether a sentence containing negation triggers
-        # aggregate/filter all sentences containing negation into a single text file, one sentence per line
+        ## read text file for analysis
+        ## finding whether a sentence containing negation triggers
+        ## aggregate/filter all sentences containing negation into a single text file, one sentence per line
         with open(self.trimmed_filepath,'w') as tfout:
             with open(self.test_filepath,'r') as tfin:
                 for line in tfin:
@@ -39,7 +39,7 @@ class DepNeg():
                         for trigger in self.NegTriggers:
                             ## filter phrases like "no problem/trouble/matter"
                             if trigger == 'no':
-                                pattern = re.compile(r'\b'+trigger+r'(?!( problem| trouble| matter| further))\b',re.IGNORECASE)
+                                pattern = re.compile(r'\b'+trigger+r'(?!( problem| trouble| matter| further| one))\b',re.IGNORECASE)
                             elif trigger == 'not':
                                 pattern = re.compile(r'\b'+trigger+r'(?!( certain| necessarily| only))\b',re.IGNORECASE)
                             elif trigger == 'without':
@@ -51,7 +51,7 @@ class DepNeg():
                                 break
 
     def parse(self):
-        # run gDep to produce denpency trees from plain text sentence
+        ## run gDep to produce denpency trees from plain text sentence
         cmd = "./gdep "+self.trimmed_filepath+" > "+self.parsed_filepath
         print "Start POS tagging, chunking, NER, and parsing ... (this may take several minutes, please wait.)"
         os.system(cmd)
@@ -72,7 +72,7 @@ class SENT():
         self.NegIndice = []
 
     def add_Row(self, row):
-        # add one row of CoNLL output into the sentence
+        ## add one row of CoNLL output into the sentence
         row = row.strip()
         cols = row.split('\t')
         self.indices.append(int(cols[0]))
@@ -145,12 +145,14 @@ class DepND(DepNeg):
         return sentwrapper.get_NegIndice()
                 
     def MST(self, i_root, i_neg, sentwrapper):
-        # maximal spanning tree with SUB&Right and Punc rules
+        ## maximal spanning tree with SUB&Right and Punc rules
+        ## *SUB&Right* = only span towards right or span left through SUB arc, span nothing if there's no SUB arc or right part. (notice that this rule only apply to root node)
+        ## *Punc* = All MST rules *should not cross punctuation marks* during spanning, no matter it spans towards left or right (relatively to the position of trigger word). But some arcs can (such as SUB, OBJ and PRD).
         indices = []
         openlist = []
-        ## (index, whether_purebred) tuple is used
+        ## (index, whether_purebred) tuple locates each word
         ## purebred means the node has an SUB, OBJ or PRD ancestor
-        ## only purebred nodes can span across punctuations
+        ## only purebred nodes can violate Punc-rule (span across punctuations)
         indices.append((i_root,False))
         openlist.append((i_root,False))
         while openlist:
@@ -176,7 +178,7 @@ class DepND(DepNeg):
                         openlist.append((j,whether_purebred))
                         indices.append((j,whether_purebred))
         ## find all non-purebred punctutations
-        i_punc = 99999
+        i_punc = float("inf")
         for index in indices:
             if sentwrapper.get_dep()[index[0]-1] == 'P' and index[1] == False:
                 if index[0] < i_punc:
@@ -194,7 +196,7 @@ class DepND(DepNeg):
 
     def oldMST(self, i_root, sentwrapper):
         # old maximal spanning tree without any additional rules
-        # kept in case someone may need it someday
+        # it's kept in case someone may need it someday
         indice = []
         openlist = []
         indice.append(i_root)
@@ -217,7 +219,6 @@ class DepND(DepNeg):
             words[i_neg-1] = '<NEG>'+words[i_neg-1]+'</NEG>'
         words[indices[0]-1] = '<SCOPE>'+words[indices[0]-1]
         words[indices[-1]-1] += '</SCOPE>'
-        ## there may be actually gap within the scope
         return ' '.join(words)
 
     def elevate(self, i, sentwrapper):
@@ -237,14 +238,17 @@ class DepND(DepNeg):
         result = ''
         indice_neg = self.findNeg(sentwrapper)
         if indice_neg != []:
+            ## map tagset to rules
             tagset_gMST = set(['RB','DT','JJ','CC'])
             tagset_sMST = set(['NN','IN','VB','VBD','VBG','VBN','VBP','VBZ','MD'])
             for i_neg in indice_neg:
                 ## sMST rule
+                ## maximal spanning tree from itself;
                 if sentwrapper.get_POS()[i_neg-1] in tagset_sMST:
                     i_root = self.elevate(i_neg, sentwrapper)
                     result += self.indice2result(self.MST(i_root,i_neg,sentwrapper), i_neg, sentwrapper)+'\n'
                 ## gMST rule
+                ## maximal spanning tree from its immediate governor;
                 if sentwrapper.get_POS()[i_neg-1] in tagset_gMST:
                     i_root = self.elevate(i_neg, sentwrapper)
                     i_root = sentwrapper.get_arc_end()[i_root-1]
@@ -253,7 +257,7 @@ class DepND(DepNeg):
 
     def run_DepND(self):
         # 1. read one sentence, find negation trigger words in the sentence;
-        # 2. run corresponding rules to determine scope, return the index range for the scope.
+        # 2. run corresponding rules to determine scope, return the index-range for the scope.
         print "Start generating scope for negation triggers ..."
         sent_tmp = SENT()
         with open(self.result_filepath,'w') as fout:

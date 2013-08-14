@@ -13,7 +13,8 @@ Run the command `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`. e.
 * Filter all sentences not containing negation triggers.
 
 * For sentences containing negation triggers, parse each of them using a dependency parser.  
-> using [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae, please see `GDep_README` for more details.
+> using [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae, please see `GDep_README` for more details.  
+> Note that all files in folder except `README.md`, `README.html`, and `DepND.py` are parts of `GDep beta2`.
 
 * Use parse tree and rules to determine the scope of negation.
 
@@ -32,7 +33,7 @@ Run the command `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`. e.
 > maximal spanning tree from itself;
 
 * *withinPUNC*
-> All MST rules *should not cross punctuation marks* during spanning, no matter it spans towards left or right (relatively to the position of trigger word). But maybe some arcs can (such as SUB, OBJ and PRD).
+> All MST rules *should not cross punctuation marks* during spanning, no matter it spans towards left or right (relatively to the position of trigger word). But some arcs can (such as SUB, OBJ and PRD).
 
 #### Specification
 
