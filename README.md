@@ -4,21 +4,22 @@ DepNegEx
 Negation detection using dependency parsing.
 
 ## How to use:
-Run the command `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`. e.g. `python DepND.py ./data/bioscope_abstracts_cleaned.txt ./data/result.txt`
+* Make sure `python 2.7` is installed on your machine. And the program share the the same directory as [GDep parser](http://people.ict.usc.edu/~sagae/parser/gdep/).
 
-## Basic Procedures ##
+* Run the command in terminal: `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`.  
+> e.g. `python DepND.py ./data/bioscope_abstracts_cleaned.txt ./data/result.txt`
 
-* Separate text input into sentences.
+## Basic Workflow ##
 
-* Filter all sentences not containing negation triggers.
-
-* For sentences containing negation triggers, parse each of them using a dependency parser.  
-> using [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae, please see `GDep_README` for more details.  
+* Separate text input into sentences. Filter all sentences not containing negation triggers. For sentences containing negation triggers, parse each of them using a dependency parser.  
+> This task is done by `DepNeg` class, using [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae, please see `GDep_README` for more details.  
 > Note that all files in folder except `README.md`, `README.html`, and `DepND.py` are parts of `GDep beta2`.
 
-* Use parse tree and rules to determine the scope of negation.
+* Use parse tree and rules to determine the scope of negation.  
+> This task is done by `DepND` class  
 
-* Extract keywords or entities within these scopes if you like.
+* Extract keywords or entities within these scopes if you like.  
+> Such functionality is not implemented in DepNegEx.
 
 ## Rules for determining scope
 
@@ -45,7 +46,7 @@ Run the command `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`. e.
 | VB\*, IN | fail, lack, lacking, excluding, without, except | *sMST* |
 | NN | none, lack, absence, failure (to/of)| *sMST* |
 
-### However, major rules above are not panaceas:
+### However, default rules above are not panaceas:
 
 #### Exceptions that cannot be coped with default rules:
 
@@ -70,7 +71,7 @@ Run the command `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`. e.
 > * *ggMST* (double "g" indicates governor of governor) can be replaced by *$_Elevate*.
 > * There're also minor rules to deal with subjunctive moods.
 
-#### So, add some minor rules:
+#### So, some minor rules are added:
 
 * *$_Elevate* 
 > elevate root node through all possible $ arcs then do a default MST (either sMST or gMST);
