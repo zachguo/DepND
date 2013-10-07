@@ -56,6 +56,7 @@ class DepNeg():
         cmd = "./gdep "+self.trimmed_filepath+" > "+self.parsed_filepath
         print "Start POS tagging, chunking, NER, and parsing ... (this may take several minutes, please wait.)"
         os.system(cmd)
+        # if you get "sh: ./gdep permission denied" message, run command "chmod u+rwx ./gdep" first.
 
     def run_parse(self):
         self.read_TestFile()
