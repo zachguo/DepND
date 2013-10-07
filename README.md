@@ -88,3 +88,7 @@ Negation detection using dependency parse trees.
 * Coping with double/triple negation.
 * Coreference and pronoun resolution.
 * Output formatting.
+
+## License
+
+This projected is licensed under the terms of the Apache License, Version 2.0.
