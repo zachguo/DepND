@@ -1,25 +1,22 @@
 DepNegEx
 ========
 
-Negation detection using dependency parsing.
+Negation detection using dependency parse trees.
 
 ## How to use:
-* Make sure `python 2.7` is installed on your machine. And the program share the the same directory as [GDep parser](http://people.ict.usc.edu/~sagae/parser/gdep/).
+* Make sure `python 2.7` and [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) is installed on your machine. And the program share the the same directory as GDep parser.
 
 * Run the command in terminal: `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`.  
-> e.g. `python DepND.py ./data/bioscope_abstracts_cleaned.txt ./data/result.txt`
+> e.g. `python DepND.py ./data/testing/bioscope_abstracts_cleaned.txt ./data/result.txt`
 
 ## Basic Workflow ##
 
 * Separate text input into sentences. Filter all sentences not containing negation triggers. For sentences containing negation triggers, parse each of them using a dependency parser.  
-> This task is done by `DepNeg` class, using [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) created by Prof. Kenji Sagae, please see `GDep_README` for more details.  
-> Note that all files in folder except `README.md`, `README.html`, and `DepND.py` are parts of `GDep beta2`.
+> This task is done by `DepNeg` class, using, by default, `GDep beta2` created by Prof. Kenji Sagae.  
+> You certainly can use your favorite parser instead of `GDep`, just notice that you need modify `Sent` class if the parser you use doesn't generate output in CoNLL 2007 format.
 
-* Use parse tree and rules to determine the scope of negation.  
+* Use parse tree (CoNLL 2007 format) and rules to determine the scope of negation.  
 > This task is done by `DepND` class  
-
-* Extract keywords or entities within these scopes if you like.  
-> Such functionality is not implemented in DepNegEx.
 
 ## Rules for determining scope
 
