@@ -18,9 +18,9 @@ Negation detection using dependency parse trees.
 * Use parse tree (CoNLL 2007 format) and rules to determine the scope of negation.  
 > This task is done by `DepND` class  
 
-## Rules for determining scope
+## Rules for determining negation scope
 
-### Default rules:
+### I. Default rules:
 
 #### Major rules:
 
@@ -43,7 +43,7 @@ Negation detection using dependency parse trees.
 | VB\*, IN | fail, lack, lacking, excluding, without, except | *sMST* |
 | NN | none, lack, absence, failure (to/of)| *sMST* |
 
-### However, default rules above are not panaceas:
+### II. However, default rules above are not panaceas:
 
 #### Exceptions that cannot be coped with default rules:
 
@@ -76,7 +76,7 @@ Negation detection using dependency parse trees.
 * *SUB&Right* 
 > only span towards right or span left through SUB arc, span nothing if there's no SUB arc or right part. (notice that this rule only apply to root node)
 
-### Performance of designed rules are vulnerable to:
+### III. Performance of designed rules are sensitive to:
 
 * Performance of PP attachment in the parser;
 > e.g. The prepositional phrase "on sth" in "no effect on sth" is often wrongly attached to other NN rather than "effect".  
@@ -84,7 +84,7 @@ Negation detection using dependency parse trees.
 * Inconsistency of decision in whether including the left part of parsed tree governed by a SUB arc.
 > e.g. In BioScope corpus, human annotator inconsistently include or exclude the subjects of sentences in the negation scope. A safer solution than the *SUB&Right* rule may be discarding SUB arcs and just spanning through towards right, sacrificing false negative for false positive.
 
-## Procedures after determining the scope
+## Next Steps?
 * Coping with double/triple negation.
 * Coreference and pronoun resolution.
 * Output formatting.
