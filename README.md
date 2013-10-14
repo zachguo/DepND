@@ -1,7 +1,7 @@
-DepNegEx
+DepND
 ========
 
-Negation detection using dependency parse trees.
+Rule-based negation detection using dependency parse trees.
 
 ## How to use:
 * Make sure `python 2.7` and [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) is installed on your machine. And the program share the the same directory as GDep parser.
