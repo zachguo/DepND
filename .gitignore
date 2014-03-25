@@ -1,4 +1,5 @@
 .DS_Store
+filtered.tmp
+parsed.tmp
 data/archive/*
-data/testing/bioscope_abstracts_cleaned.txt
-data/testing/SFURC_MOVIES_cleaned.txt
+data/test/*

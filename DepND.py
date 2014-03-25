@@ -24,11 +24,11 @@ from collections import defaultdict
 class DepNeg():
 
     def __init__(self, test_filepath, result_filepath):
-        self.trigger_filepath = "./data/negTriggers.txt"
+        self.trigger_filepath = "./negTriggers.txt"
         self.test_filepath = test_filepath
         self.result_filepath = result_filepath
-        self.trimmed_filepath = "./data/tmp/test_filtered"
-        self.parsed_filepath = "./data/tmp/parsed"
+        self.trimmed_filepath = "./filtered.tmp"
+        self.parsed_filepath = "./parsed.tmp"
         self.read_NegTriggers()
 
     def read_NegTriggers(self):
@@ -292,7 +292,7 @@ class DepND(DepNeg):
 
 
 ## run following command to execute this program:
-## python DepND.py ./data/testing/bioscope_abstracts_cleaned.txt ./data/result.txt
+## python DepND.py path/to/test.txt path/to/result.txt
 if __name__ == '__main__':
     args = sys.argv
     if len(args) != 3:
