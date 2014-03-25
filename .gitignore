@@ -1,3 +1,4 @@
-/genia.mod
-
 .DS_Store
+data/archive/*
+data/testing/bioscope_abstracts_cleaned.txt
+data/testing/SFURC_MOVIES_cleaned.txt
