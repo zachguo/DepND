@@ -4,7 +4,7 @@ DepND
 Rule-based negation detection using dependency parse trees.
 
 ## How to use:
-* Make sure `python 2.7` and [GDep beta2](http://people.ict.usc.edu/~sagae/parser/gdep/) is installed on your machine. And the program share the the same directory as GDep parser.
+* Make sure `python 2.7` and [GDep beta2](http://compling.ucdavis.edu/sagae/gdep/) is installed on your machine. And the program share the the same directory as GDep parser.
 
 * Run the command in terminal: `python DepND.py YOUR_TESTING_DATA_FILEPATH OUTPUT_FILEPATH`.  
 > e.g. `python DepND.py ./data/testing/bioscope_abstracts_cleaned.txt ./data/result.txt`
